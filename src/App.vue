@@ -6,14 +6,16 @@
       dark
     >
       <div class="d-flex align-center">
-        <v-img
-          alt="EstrelaBet Logo"
-          class="shrink mb-2"
-          contain
-          src="./assets/logo.png"
-          transition="scale-transition"
-          width="150"
-        />
+        <router-link to="/">
+          <v-img
+            alt="EstrelaBet Logo"
+            class="shrink mb-2"
+            contain
+            src="./assets/logo.png"
+            transition="scale-transition"
+            width="150"
+          />
+        </router-link>
       </div>
       <v-spacer></v-spacer>
       <v-btn

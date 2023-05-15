@@ -22,7 +22,7 @@ async function getGamesList () {
 
 async function getGameById (id) {
   return axios.get(
-    `${API_URL}games/${id}`,
+    `${API_URL}game?id=${id}`,
     {
       headers
     }

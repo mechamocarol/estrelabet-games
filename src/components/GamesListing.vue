@@ -5,18 +5,10 @@
       <v-card
         v-for="(game, index) in games"
         :key="`${game.id}-${index}`"
-        :loading="false"
+        @click="openGameDetails(game.id)"
         class="mx-auto my-12"
         max-width="374"
       >
-        <template slot="progress">
-          <v-progress-linear
-            color="deep-purple"
-            height="10"
-            indeterminate
-          ></v-progress-linear>
-        </template>
-
         <v-img
           height="200"
           :src="game.thumbnail"
@@ -59,7 +51,7 @@ export default {
   }),
   async mounted () {
     const gamesList = await gamesService.getGamesList()
-    if (gamesList.data) {
+    if (gamesList.status === 200) {
       // Vuex stores request's payload, so we don't need multiple requests to update the view.
       this.$store.commit('games', gamesList.data)
     }
@@ -72,12 +64,20 @@ export default {
   methods: {
     openGameURL (url) {
       window.open(url, '_blank')
+    },
+    openGameDetails (gameId) {
+      this.$router.push({
+        name: 'game',
+        params: {
+          id: gameId
+        }
+      })
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .genre {
   cursor: default;
 }
