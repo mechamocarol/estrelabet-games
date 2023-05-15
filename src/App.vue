@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="#001D3D"
       dark
     >
       <div class="d-flex align-center">
@@ -15,19 +15,23 @@
           width="150"
         />
       </div>
-
       <v-spacer></v-spacer>
-
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        text
+        @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+      >
+        <span class="mr-2">Theme</span>
+        <v-icon>mdi-theme-light-dark</v-icon>
+      </v-btn>
+      <v-btn
+        href="https://github.com/mechamocarol/estrelabet-games"
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <span class="mr-2">Github Repository</span>
+        <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
-
     <v-main>
       <router-view/>
     </v-main>
@@ -35,12 +39,7 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-
-  data: () => ({
-    //
-  }),
+  name: 'App'
 };
 </script>

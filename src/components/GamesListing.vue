@@ -1,25 +1,88 @@
 <template>
   <v-container>
-    <v-row><p>Hey, fuckers!</p></v-row>
+    <h1 class="display-1 font-weight-bold mt-3">Game finder</h1>
+    <v-row class="mb-10">
+      <v-card
+        v-for="(game, index) in games"
+        :key="`${game.id}-${index}`"
+        :loading="false"
+        class="mx-auto my-12"
+        max-width="374"
+      >
+        <template slot="progress">
+          <v-progress-linear
+            color="deep-purple"
+            height="10"
+            indeterminate
+          ></v-progress-linear>
+        </template>
+
+        <v-img
+          height="200"
+          :src="game.thumbnail"
+        ></v-img>
+
+        <v-card-title>{{ game.title }}</v-card-title>
+        <v-card-subtitle>{{ game.publisher }}</v-card-subtitle>
+        <v-card-text>
+          <div class="text-subtitle-1 platform-info">
+            <v-icon class="mr-2">mdi-devices</v-icon> <span>{{ game.platform }}</span>
+          </div>
+        </v-card-text>
+
+        <v-card-text>
+          <v-chip class="deep-purple accent-4 white--text genre">{{ game.genre }}</v-chip>
+        </v-card-text>
+
+        <v-divider class="mx-2"></v-divider>
+      
+        <v-card-actions>
+          <v-btn
+            color="deep-purple lighten-2"
+            text
+            @click="openGameURL(game.game_url)"
+          >
+            Game link <v-icon>mdi-open-in-new</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-  import { gamesService } from '@/services'
-  export default {
-    name: 'GamesListing',
-    data: () => ({
-      loading: false
-    }),
-    async mounted () {
-      const gamesList = await gamesService.getGamesList()
+import { gamesService } from '@/services'
+export default {
+  name: 'GamesListing',
+  data: () => ({
+    loading: false
+  }),
+  async mounted () {
+    const gamesList = await gamesService.getGamesList()
+    if (gamesList.data) {
       // Vuex stores request's payload, so we don't need multiple requests to update the view.
       this.$store.commit('games', gamesList.data)
-    },
-    computed: {
-      games () {
-        return this.$store.getters['getGamesList']
-      }
+    }
+  },
+  computed: {
+    games () {
+      return this.$store.getters['getGamesList']
+    }
+  },
+  methods: {
+    openGameURL (url) {
+      window.open(url, '_blank')
     }
   }
+}
 </script>
+
+<style lang="scss">
+.genre {
+  cursor: default;
+}
+.platform-info {
+  align-items: center;
+  display: flex;
+}
+</style>
