@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <h1 class="display-1 font-weight-bold mt-3">Game finder</h1>
-    <v-row class="mb-10">
+    <loading-circle v-if="loading"/>
+    <v-row v-else class="mb-10">
       <v-card
         v-for="(game, index) in games"
         :key="`${game.id}-${index}`"
@@ -44,17 +45,21 @@
 
 <script>
 import { gamesService } from '@/services'
+import LoadingCircle from '../components/LoadingCircle.vue'
 export default {
   name: 'GamesListing',
+  components: { LoadingCircle },
   data: () => ({
     loading: false
   }),
   async mounted () {
+    this.loading = true
     const gamesList = await gamesService.getGamesList()
     if (gamesList.status === 200) {
       // Vuex stores request's payload, so we don't need multiple requests to update the view.
       this.$store.commit('games', gamesList.data)
     }
+    this.loading = false
   },
   computed: {
     games () {
