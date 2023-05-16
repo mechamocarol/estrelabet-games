@@ -13,7 +13,7 @@
             :continuous="true"
             hide-delimiter-background
             show-arrows-on-hover
-            v-if="currentGame.screenshots.length > 0"
+            v-if="currentGame && currentGame.screenshots"
             >
             <v-carousel-item
               v-for="(item, i) in currentGame.screenshots"

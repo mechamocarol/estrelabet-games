@@ -1,6 +1,6 @@
 # Game Finder
 An application to search games by name, category or tag and platform in MMO Games API.
-You can access it: https://game-finder-mauve.vercel.app/
+You can access it here: https://game-finder-mauve.vercel.app/
 
 # Applied technologies
 - VueJS

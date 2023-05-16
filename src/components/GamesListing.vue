@@ -70,9 +70,15 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-        <v-row class="no-results" v-if="pagesTotal > 1">
-          <v-pagination class="pagination mb-2" v-model="page" :length="pagesTotal" @input="changePage"></v-pagination>
-        </v-row>
+      </v-row>
+      <v-row class="no-results mb-10" v-if="pagesTotal > 1">
+        <v-pagination
+          class="pagination mb-2"
+          v-model="page"
+          :length="pagesTotal"
+          @input="changePage"
+          :total-visible="6"
+        ></v-pagination>
       </v-row>
       <v-row v-else class="no-results">
         <h2>There's no results for this search. Check the filters!</h2>
@@ -183,6 +189,5 @@ export default {
 .no-results {
   display: block;
   text-align: center;
-  margin-top: 10%;
 }
 </style>
