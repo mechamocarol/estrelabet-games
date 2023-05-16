@@ -80,7 +80,7 @@
           :total-visible="6"
         ></v-pagination>
       </v-row>
-      <v-row v-else class="no-results">
+      <v-row v-if="filteredGames.length === 0" class="no-results">
         <h2>There's no results for this search. Check the filters!</h2>
       </v-row>
     </div>
