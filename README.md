@@ -1,4 +1,11 @@
-# estrelabet-games
+# Game Finder
+An application to search games by name, category or tag and platform in MMO Games API.
+
+# Applied technologies
+- VueJS
+- VueX
+- VueRouter
+- Vuetify 
 
 ## Project setup
 ```
@@ -19,6 +26,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
