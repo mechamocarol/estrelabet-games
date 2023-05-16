@@ -35,7 +35,7 @@
       </v-row>
       <v-row class="mb-10" v-if="filteredGames.length > 0">
         <v-card
-          v-for="(game, index) in filteredGames"
+          v-for="(game, index) in currentPageGames"
           :key="`${game.id}-${index}`"
           @click="openGameDetails(game.id)"
           class="mx-auto my-12"
@@ -70,6 +70,9 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        <v-row class="no-results" v-if="pagesTotal > 1">
+          <v-pagination class="pagination mb-2" v-model="page" :length="pagesTotal" @input="changePage"></v-pagination>
+        </v-row>
       </v-row>
       <v-row v-else class="no-results">
         <h2>There's no results for this search. Check the filters!</h2>
@@ -88,7 +91,9 @@ export default {
     loading: false,
     search: '',
     selectedCategory: null,
-    selectedPlatform: null
+    selectedPlatform: null,
+    page: 1,
+    itemsPerPage: 15,
   }),
   async mounted () {
     this.getAllGames()
@@ -108,6 +113,20 @@ export default {
         return game.title.toLowerCase().includes(this.search.toLowerCase())
       })
       return filtered
+    },
+    pagesTotal () {
+      if (this.filteredGames.length > 0) {
+        const total = Math.ceil(this.filteredGames.length / this.itemsPerPage) 
+        return total
+      }
+      return 0
+    },
+    currentPageGames () {
+      let filterIndex = this.page
+      if (this.page > this.filteredGames.length) {
+        filterIndex = 1
+      }
+      return this.filteredGames.slice((filterIndex * this.itemsPerPage) - this.itemsPerPage, filterIndex * this.itemsPerPage)
     }
   },
   methods: {
@@ -123,6 +142,7 @@ export default {
     async filterGames () {
       this.loading = true
       this.search = ''
+      this.page = 1
 
       // We'll filter just when at least one of the filters are !== null
       if (this.selectedCategory || this.selectedPlatform) {
@@ -144,6 +164,9 @@ export default {
           id: gameId
         }
       })
+    },
+    changePage () {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 }
