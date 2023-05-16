@@ -22,7 +22,6 @@
         text
         @click="$vuetify.theme.dark = !$vuetify.theme.dark"
       >
-        <span class="mr-2">Theme</span>
         <v-icon>mdi-theme-light-dark</v-icon>
       </v-btn>
       <v-btn
@@ -30,7 +29,6 @@
         target="_blank"
         text
       >
-        <span class="mr-2">Github Repository</span>
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>

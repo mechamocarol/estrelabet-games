@@ -6,21 +6,19 @@
       <h3 class="ml-1">{{ currentGame.publisher }}</h3>
       <h5 class="ml-1 font-weight-light"> Developed by {{ currentGame.developer }}</h5>
       <v-row class="mb-10">
-        <v-card
-        class="mx-auto my-12"
-        width="100%"
-        >
+        <v-card class="mx-auto my-12" width="100%">
           <v-carousel
             cycle
             height="300"
             :continuous="true"
             hide-delimiter-background
             show-arrows-on-hover
+            v-if="currentGame.screenshots.length > 0"
             >
             <v-carousel-item
-            v-for="(item, i) in currentGame.screenshots"
-            :key="i"
-            :src="item.image"
+              v-for="(item, i) in currentGame.screenshots"
+              :key="i"
+              :src="item.image"
             ></v-carousel-item>
           </v-carousel>
   

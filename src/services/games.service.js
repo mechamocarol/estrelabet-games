@@ -8,7 +8,8 @@ const headers = {
 
 export const gamesService = {
   getGamesList,
-  getGameById
+  getGameById,
+  getGamesByCategoryOrPlatform
 }
 
 async function getGamesList () {
@@ -26,5 +27,19 @@ async function getGameById (id) {
     {
       headers
     }
+  )
+}
+
+async function getGamesByCategoryOrPlatform (category, platform) {
+  let url = `${API_URL}games?`
+  if (platform) {
+    url += `platform=${platform}&`
+  }
+  if (category) {
+    url += `category=${category}&`
+  }
+ 
+  return axios.get(
+    url, { headers }
   )
 }
