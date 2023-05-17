@@ -14,11 +14,12 @@
             hide-delimiter-background
             show-arrows-on-hover
             v-if="currentGame && currentGame.screenshots"
-            >
+          >
             <v-carousel-item
               v-for="(item, i) in currentGame.screenshots"
               :key="i"
               :src="item.image"
+              eager
             ></v-carousel-item>
           </v-carousel>
   
